@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { TextField, Button, Container, Typography, Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+
+import { TextField, Button, Container, Typography, Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Alert } from '@mui/material';
 
 const ExecutiveOperations: React.FC = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [executives, setExecutives] = useState([]);
+  const [error, setError] = useState<string | null>(null);
+  const accessToken = localStorage.getItem('accessToken');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,9 +19,16 @@ const ExecutiveOperations: React.FC = () => {
 
   const fetchExecutives = async () => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/qualityExecutives`);
+      const accessToken = localStorage.getItem('accessToken')
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/executives`,{ headers: {"Authorization" : `Bearer ${accessToken}`} });
       setExecutives(response.data);
+      setError(null);
     } catch (error) {
+      if (axios.isAxiosError(error) && error.response?.status === 404) {
+        setError('Executives not found.');
+      } else {
+        setError('An error occurred while fetching executives.');
+      }
       console.error('fetchExecutives', error);
     }
   };
@@ -26,28 +36,34 @@ const ExecutiveOperations: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/qualityExecutives`, { username, email, password });
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/executives`, { username, email, password },{ headers: {"Authorization" : `Bearer ${accessToken}`} });
       fetchExecutives();
+      setError(null);
     } catch (error) {
       console.error(error);
+      setError('An error occurred while adding the executive.');
     }
   };
 
   const handleDelete = async (id: string) => {
     try {
-      await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/qualityExecutives/${id}`);
+      await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/executives/${id}`,{ headers: {"Authorization" : `Bearer ${accessToken}`} });
       fetchExecutives();
+      setError(null);
     } catch (error) {
       console.error(error);
+      setError('An error occurred while deleting the executive.');
     }
   };
 
   const handleUpdate = async (id: string, updatedExecutive: { username: string; email: string; password: string }) => {
     try {
-      await axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/qualityExecutives/${id}`, updatedExecutive);
+      await axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/executives/${id}`, updatedExecutive,{ headers: {"Authorization" : `Bearer ${accessToken}`} });
       fetchExecutives();
+      setError(null);
     } catch (error) {
       console.error(error);
+      setError('An error occurred while updating the executive.');
     }
   };
 
@@ -58,6 +74,7 @@ const ExecutiveOperations: React.FC = () => {
           <Typography variant="h4" component="h1" gutterBottom align="center">
             Add Executive
           </Typography>
+          {error && <Alert severity="error">{error}</Alert>}
           <TextField
             fullWidth
             type="text"
