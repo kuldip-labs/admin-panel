@@ -1,6 +1,6 @@
 export interface User {
     userId: string;
-    role: 'user' | 'admin';
+    role: 'user' | 'admin' | 'executive';
   }
   
   export interface AuthContextType {

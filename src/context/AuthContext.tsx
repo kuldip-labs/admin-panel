@@ -32,7 +32,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       console.error("error decoding token");
       logout();
     }
-    navigate('/dashboard');
+    if (user && user.role === 'admin') navigate('/adminDashboard');
+    else if (user && user.role === 'executive') navigate('/executiveDashboard');
+    else if (user && user.role === 'user') navigate('/userDashboard');
+    else navigate('/login');
   };
 
   const logout = () => {

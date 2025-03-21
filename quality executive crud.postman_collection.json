@@ -1,0 +1,253 @@
+{
+	"info": {
+		"_postman_id": "77c371e3-658c-4d52-91f3-0dc35d05dac2",
+		"name": "quality executive crud",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27680973",
+		"_collection_link": "https://restless-meteor-886793.postman.co/workspace/moon~02431961-5dec-42db-a127-f0c4b5aee161/collection/27680973-77c371e3-658c-4d52-91f3-0dc35d05dac2?action=share&source=collection_link&creator=27680973"
+	},
+	"item": [
+		{
+			"name": "createQE",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"testQE2\",\r\n\"email\": \"testQE2@gmail.com\",\r\n\"password\": \"password123\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/qualityExecutives",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"qualityExecutives"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllQE",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/qualityExecutives",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"qualityExecutives"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getQEById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/qualityExecutives/67d7fe58b98f6672b164339e",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"qualityExecutives",
+						"67d7fe58b98f6672b164339e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteQEById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/qualityExecutives/67d7fe58b98f6672b164339e",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"qualityExecutives",
+						"67d7fe58b98f6672b164339e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateQEById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2QxMzdlMjQ3NTIyODFlODdhN2RlMmMiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDIyMDY3MzUsImV4cCI6MTc0MjI5MzEzNX0.oA4y1UyLlI40KWtHjry3XXAfFJZF8Nmbark25ZUyIFo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"QE2\",\r\n\"email\": \"QE2@gmail.com\",\r\n\"password\": \"password123\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/qualityExecutives/67d7fe58b98f6672b164339e",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"qualityExecutives",
+						"67d7fe58b98f6672b164339e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "assignTemplate",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"templateIds\":{\"_id\": \"67d95f6a6c7fb5dba0678662\"}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/qualityExecutives/67d7fe58b98f6672b164339e/assignTemplates",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"qualityExecutives",
+						"67d7fe58b98f6672b164339e",
+						"assignTemplates"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllAssignedTemplates",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/qualityExecutives/67d7fe58b98f6672b164339e/assignedTemplates",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"qualityExecutives",
+						"67d7fe58b98f6672b164339e",
+						"assignedTemplates"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
